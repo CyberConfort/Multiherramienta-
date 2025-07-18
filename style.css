@@ -1,0 +1,73 @@
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f3f3f3;
+  color: #333;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #222;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.menu a {
+  background: #007bff;
+  color: white;
+  text-decoration: none;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 1.1em;
+  transition: background 0.3s ease;
+}
+
+.menu a:hover {
+  background: #0056b3;
+}
+
+.descarga-section {
+  margin-top: 40px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #ccc;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button {
+  padding: 12px 20px;
+  background: #28a745;
+  color: white;
+  font-size: 1em;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #1e7e34;
+}
