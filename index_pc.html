@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multiherramienta PC</title>
+  <link rel="stylesheet" href="style_pc.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>💻 Multiherramienta Web - Versión PC</h1>
+      <p>Centro de herramientas para archivos y multimedia</p>
+    </header>
+
+    <section class="grid-menu">
+      <button onclick="openPDF()">📄 Ver PDF</button>
+      <button onclick="openVideo()">🎬 Reproducir MP4</button>
+      <button onclick="openAudio()">🎵 Reproducir MP3</button>
+      <button onclick="openImages()">🖼 Ver Imágenes</button>
+      <button onclick="redirigirDescarga()">⬇️ Descargar video/audio</button>
+      <button onclick="openOffice()">📑 Office (Word, Excel, PowerPoint)</button>
+      <button onclick="printFile()">🖨 Imprimir archivos</button>
+    </section>
+
+    <section class="descarga-section">
+      <h2>Descargar video o audio</h2>
+      <input type="text" id="videoUrl" placeholder="Pega el enlace del video (YouTube, etc.)" />
+      <button onclick="redirigirASavefrom()">Ir a SaveFrom.net</button>
+    </section>
+  </div>
+
+  <script>
+    function redirigirASavefrom() {
+      const url = document.getElementById('videoUrl').value.trim();
+      if (!url) {
+        alert("Por favor, pega un enlace válido");
+        return;
+      }
+      const savefromUrl = `https://en.savefrom.net/1-q/${encodeURIComponent(url)}`;
+      window.open(savefromUrl, "_blank");
+    }
+
+    function redirigirDescarga() {
+      document.getElementById('videoUrl').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function openPDF() { alert("En futuras versiones abrirá archivos PDF."); }
+    function openVideo() { alert("En futuras versiones reproducirá MP4."); }
+    function openAudio() { alert("En futuras versiones reproducirá MP3."); }
+    function openImages() { alert("En futuras versiones mostrará imágenes."); }
+    function openOffice() { alert("En futuras versiones abrirá Word, Excel, PowerPoint."); }
+    function printFile() { alert("Función de impresión pendiente."); }
+  </script>
+</body>
+</html>
