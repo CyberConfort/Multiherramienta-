@@ -1,32 +1,94 @@
-
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html><html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Multiherramienta Web</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multiherramienta Web Funcional</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f4f4f4; color: #333; }
+    .container { max-width: 800px; margin: auto; padding: 20px; }
+    h1 { text-align: center; color: #222; }
+    .menu { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 30px 0; }
+    button { padding: 15px; font-size: 1em; border: none; border-radius: 8px; cursor: pointer; }
+    button:hover { opacity: 0.9; }
+    .blue { background: #007bff; color: white; }
+    .green { background: #28a745; color: white; }
+    .box { background: white; padding: 20px; margin-top: 20px; border-radius: 10px; box-shadow: 0 0 10px #ccc; }
+    video, audio, img { max-width: 100%; margin-top: 10px; border-radius: 10px; }
+  </style>
 </head>
 <body>
   <div class="container">
-    <h1>📁 Menú Principal</h1>
+    <h1>💻 Multiherramienta Web</h1><div class="menu">
+  <button class="blue" onclick="document.getElementById('pdfInput').click()">📄 Ver PDF</button>
+  <button class="blue" onclick="document.getElementById('videoInput').click()">🎬 Reproducir MP4</button>
+  <button class="blue" onclick="document.getElementById('audioInput').click()">🎵 Reproducir MP3</button>
+  <button class="blue" onclick="document.getElementById('imgInput').click()">🖼 Ver Imágenes</button>
+  <button class="green" onclick="document.getElementById('descargaBox').scrollIntoView({behavior: 'smooth'})">⬇️ Descargar video/audio</button>
+</div>
 
-    <div class="menu">
-      <a href="#" onclick="openPDF()">📄 Ver PDF</a>
-      <a href="#" onclick="openVideo()">🎬 Reproducir MP4</a>
-      <a href="#" onclick="openAudio()">🎵 Reproducir MP3</a>
-      <a href="#" onclick="openImages()">🖼 Ver Imágenes</a>
-      <a href="#descargar">⬇️ Descargar video/audio</a>
-    </div>
+<!-- PDF -->
+<input type="file" id="pdfInput" accept="application/pdf" style="display:none" onchange="verPDF(event)">
+<div id="pdfBox" class="box" style="display:none">
+  <h2>📄 Visor PDF</h2>
+  <iframe id="pdfViewer" width="100%" height="500px"></iframe>
+</div>
 
-    <section id="descargar" class="descarga-section">
-      <h2>Descargar video o audio</h2>
-      <input type="text" id="videoUrl" placeholder="Pega el enlace del video">
-      <button onclick="redirigirASavefrom()">Enviar a SaveFrom.net</button>
-    </section>
-  </div>
+<!-- Video -->
+<input type="file" id="videoInput" accept="video/mp4" style="display:none" onchange="verVideo(event)">
+<div id="videoBox" class="box" style="display:none">
+  <h2>🎬 Reproductor de Video</h2>
+  <video id="videoPlayer" controls></video>
+</div>
 
-  <script>
+<!-- Audio -->
+<input type="file" id="audioInput" accept="audio/mp3" style="display:none" onchange="verAudio(event)">
+<div id="audioBox" class="box" style="display:none">
+  <h2>🎵 Reproductor de Audio</h2>
+  <audio id="audioPlayer" controls></audio>
+</div>
+
+<!-- Imágenes -->
+<input type="file" id="imgInput" accept="image/*" style="display:none" onchange="verImagen(event)">
+<div id="imgBox" class="box" style="display:none">
+  <h2>🖼 Imagen seleccionada</h2>
+  <img id="imgViewer" />
+</div>
+
+<!-- Descarga -->
+<div id="descargaBox" class="box">
+  <h2>⬇️ Descargar video o audio</h2>
+  <input type="text" id="videoUrl" placeholder="Pega el enlace del video" style="width:100%; padding:10px;">
+  <button class="green" onclick="redirigirASavefrom()">Ir a SaveFrom.net</button>
+</div>
+
+  </div>  <script>
+    function verPDF(e) {
+      const file = e.target.files[0];
+      const url = URL.createObjectURL(file);
+      document.getElementById('pdfViewer').src = url;
+      document.getElementById('pdfBox').style.display = 'block';
+    }
+    function verVideo(e) {
+      const file = e.target.files[0];
+      const url = URL.createObjectURL(file);
+      const player = document.getElementById('videoPlayer');
+      player.src = url;
+      document.getElementById('videoBox').style.display = 'block';
+    }
+    function verAudio(e) {
+      const file = e.target.files[0];
+      const url = URL.createObjectURL(file);
+      const player = document.getElementById('audioPlayer');
+      player.src = url;
+      document.getElementById('audioBox').style.display = 'block';
+    }
+    function verImagen(e) {
+      const file = e.target.files[0];
+      const url = URL.createObjectURL(file);
+      const img = document.getElementById('imgViewer');
+      img.src = url;
+      document.getElementById('imgBox').style.display = 'block';
+    }
     function redirigirASavefrom() {
       const url = document.getElementById('videoUrl').value.trim();
       if (!url) {
@@ -36,11 +98,5 @@
       const savefromUrl = `https://en.savefrom.net/1-q/${encodeURIComponent(url)}`;
       window.open(savefromUrl, "_blank");
     }
-
-    function openPDF() { alert("Esta función abrirá un visor de PDF próximamente."); }
-    function openVideo() { alert("Esta función reproducirá archivos MP4 locales."); }
-    function openAudio() { alert("Esta función reproducirá archivos MP3 locales."); }
-    function openImages() { alert("Esta función mostrará imágenes del dispositivo."); }
-  </script>
-</body>
+  </script></body>
 </html>
